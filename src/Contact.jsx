@@ -24,7 +24,9 @@ function Contact() {
     setSubmitStatus(null);
     
     try {
-      const response = await fetch('http://localhost:5000/api/send-email', {
+      // Use Vercel API route in production, localhost in development
+      const apiUrl = import.meta.env.PROD ? '/api/send-email' : 'http://localhost:5000/api/send-email';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
