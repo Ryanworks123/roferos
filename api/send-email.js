@@ -2,10 +2,6 @@ const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
   console.log('API route called');
-  console.log('Environment variables:', {
-    EMAIL_USER: process.env.EMAIL_USER ? 'set' : 'not set',
-    EMAIL_PASS: process.env.EMAIL_PASS ? 'set' : 'not set'
-  });
   
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -20,12 +16,18 @@ export default async function handler(req, res) {
   }
 
   try {
+    // Hardcoded credentials for Vercel deployment
+    const EMAIL_USER = 'ryanroferos.work@gmail.com';
+    const EMAIL_PASS = 'zrkx omps ukiv jnsn';
+    
+    console.log('Creating transporter with credentials');
+    
     // Create transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: EMAIL_USER,
+        pass: EMAIL_PASS
       }
     });
 
@@ -33,8 +35,8 @@ export default async function handler(req, res) {
 
     // Email to portfolio owner
     const ownerMailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
+      from: EMAIL_USER,
+      to: EMAIL_USER,
       subject: `Portfolio Contact: ${subject}`,
       text: `
         Name: ${name}
@@ -56,7 +58,7 @@ export default async function handler(req, res) {
 
     // Confirmation email to sender
     const confirmationMailOptions = {
-      from: process.env.EMAIL_USER,
+      from: EMAIL_USER,
       to: email,
       subject: 'Message Received - Ryan Roferos Portfolio',
       text: `
