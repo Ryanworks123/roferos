@@ -40,7 +40,7 @@ function Contact() {
 
   const contactInfo = [
     { label: "Phone", value: "+63 9455105552", icon: "📱" },
-    { label: "Email", value: "Message me on Gmail", icon: "✉", link: "mailto:ryanroferos.work@gmail.com" },
+    { label: "Email", value: "Message me on Gmail", icon: "✉", link: "https://mail.google.com/mail/?view=cm&to=ryanroferos.work@gmail.com" },
     { label: "Location", value: "Carmen, Cagayan de Oro, Misamis Oriental", icon: "🇵🇭" },
     { label: "LinkedIn", value: "Find me on LinkedIn", icon: "💼", link: "https://www.linkedin.com/in/ryanganiii" }
   ];
