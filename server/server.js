@@ -14,6 +14,9 @@ app.use(express.json());
 
 // Email endpoint
 app.post('/api/send-email', async (req, res) => {
+  console.log('Received request body:', req.body);
+  console.log('Request headers:', req.headers);
+  
   const { name, email, subject, message } = req.body;
 
   // Validate input

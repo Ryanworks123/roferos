@@ -1,11 +1,18 @@
 const nodemailer = require('nodemailer');
 
 export default async function handler(req, res) {
+  console.log('API route called');
+  console.log('Environment variables:', {
+    EMAIL_USER: process.env.EMAIL_USER ? 'set' : 'not set',
+    EMAIL_PASS: process.env.EMAIL_PASS ? 'set' : 'not set'
+  });
+  
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { name, email, subject, message } = req.body;
+  console.log('Request body:', { name, email, subject, message });
 
   // Validate input
   if (!name || !email || !subject || !message) {
@@ -21,6 +28,8 @@ export default async function handler(req, res) {
         pass: process.env.EMAIL_PASS
       }
     });
+
+    console.log('Transporter created');
 
     // Email to portfolio owner
     const ownerMailOptions = {
