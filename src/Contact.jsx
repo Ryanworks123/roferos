@@ -20,15 +20,15 @@ function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Create mailto link with form data
+    // Create Gmail compose URL with form data
     const subject = encodeURIComponent(formData.subject);
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    const mailtoLink = `mailto:ryanroferos.work@gmail.com?subject=${subject}&body=${body}`;
+    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=ryanroferos.work@gmail.com&su=${subject}&body=${body}`;
     
-    // Open email client
-    window.location.href = mailtoLink;
+    // Open Gmail in new tab
+    window.open(gmailLink, '_blank');
     
     // Show success message and reset form
     setSubmitStatus('success');
