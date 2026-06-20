@@ -25,7 +25,7 @@ function Contact() {
     const body = encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=ryanroferos.work@gmail.com&su=${subject}&body=${body}`;
+    const gmailLink = `https://mail.google.com/mail/?view=cm&to=ryanroferos.work@gmail.com&su=${subject}&body=${body}`;
     
     // Open Gmail in new tab
     window.open(gmailLink, '_blank');
