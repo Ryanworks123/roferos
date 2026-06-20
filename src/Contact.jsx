@@ -8,6 +8,7 @@ function Contact() {
     subject: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
   const handleChange = (e) => {
@@ -17,25 +18,34 @@ function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
     
-    // Create Gmail compose URL with form data
-    const subject = encodeURIComponent(formData.subject);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    const gmailLink = `https://mail.google.com/mail/?view=cm&to=ryanroferos.work@gmail.com&su=${subject}&body=${body}`;
-    
-    // Open Gmail in new tab
-    window.open(gmailLink, '_blank');
-    
-    // Show success message and reset form
-    setSubmitStatus('success');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    
-    // Clear success message after 5 seconds
-    setTimeout(() => setSubmitStatus(null), 5000);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -136,8 +146,8 @@ function Contact() {
                   required
                 />
               </div>
-              <button type="submit" className="submit-button">
-                Send Message
+              <button type="submit" className="submit-button" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
               {submitStatus === 'success' && (
                 <motion.div
