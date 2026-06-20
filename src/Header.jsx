@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
   return (
     <header>
-      <h1>Ryan John H. Roferos</h1>
+      <h1><a href="#hero"><img src="favicon.png" alt="" style={{ width: '32px', height: '32px' }} /></a></h1>
       <nav className="nav-menu">
         <ul>
           <li><a href="#hero">Home</a></li>
