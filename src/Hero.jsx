@@ -13,21 +13,14 @@ function Hero() {
           className="hero-content"
         >
           <div className="hero-text">
-            <h1 className="hero-title">I'm Ryan Roferos</h1>
-            <h2 className="hero-subtitle">Information Technology Professional</h2>
+            <h1 className="hero-title">Ryan Roferos</h1>
+            <h2 className="hero-subtitle">IT Professional</h2>
             <p className="hero-description">
-              Information Technology graduate with hands-on experience in technical sales, 
-              customer service, hardware and software support, PC assembly, troubleshooting, 
-              and system installation. Completed a 540-hour Internship at MAKOTEK Computer 
-              Sales Inc. assisting customers with product recommendations, compatibility 
-              assessments, and after-sales support. Strong communication, problem-solving, 
-              and technical skills with a commitment to delivering excellent customer 
-              experiences and business results.
+              Technical sales, customer service, hardware & software support
             </p>
             <div className="hero-buttons">
-              <a href="CV.pdf" className="hero-button primary" target="_blank" rel="noopener noreferrer">Check Resume</a>
-              <a href="#contact" className="hero-button primary">Get in Touch</a>
-              <a href="#experience" className="hero-button secondary">View Experience</a>
+              <a href="CV.pdf" className="hero-button primary" target="_blank" rel="noopener noreferrer">View Resume</a>
+              <a href="#contact" className="hero-button primary">Contact Me</a>
             </div>
           </div>
           <motion.div
@@ -36,7 +29,7 @@ function Hero() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="hero-image"
           >
-            <img src={profileImage} alt="profile.jpg" />
+            <img src={profileImage} alt="Ryan Roferos" loading="lazy" />
           </motion.div>
         </motion.div>
       </div>
