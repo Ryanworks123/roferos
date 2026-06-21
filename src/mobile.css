@@ -1,0 +1,304 @@
+/* Mobile-Only CSS - Overrides for mobile devices */
+/* This file uses media queries to target mobile devices only */
+/* Import AFTER index.css to override only on mobile */
+
+/* ========================================
+   MOBILE BREAKPOINT (768px and below)
+   ======================================== */
+@media (max-width: 768px) {
+  
+  /* ========================================
+     HEADER FIXES
+     ======================================== */
+  header {
+    height: 56px;
+    padding: 0 16px;
+  }
+  
+  header h1 {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  
+  header h1 a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* ========================================
+     NAVIGATION FIXES
+     ======================================== */
+  .nav-menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0a0e27;
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+    z-index: 999;
+    padding: 24px;
+    overflow-y: auto;
+  }
+  
+  .nav-menu.open {
+    transform: translateX(0);
+  }
+  
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .nav-menu a {
+    padding: 16px;
+    font-size: 1rem;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Hamburger button - show only on mobile */
+  .hamburger {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+  
+  .hamburger:hover {
+    background: rgba(59, 130, 246, 0.1);
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #ffffff;
+    margin: 4px 0;
+    transition: all 0.25s ease;
+    border-radius: 2px;
+  }
+  
+  /* ========================================
+     HERO SECTION FIXES
+     ======================================== */
+  .hero-section {
+    padding: 64px 16px;
+    min-height: calc(100vh - 56px);
+  }
+  
+  .hero-content {
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .hero-text {
+    text-align: center;
+    order: 2;
+  }
+  
+  .hero-image {
+    order: 1;
+    margin-bottom: 16px;
+  }
+  
+  .hero-image img {
+    max-height: 300px;
+  }
+  
+  .hero-title {
+    font-size: 1.75rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .hero-description {
+    font-size: 0.875rem;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .hero-button {
+    width: 100%;
+    padding: 14px 24px;
+    min-height: 44px;
+    text-align: center;
+  }
+  
+  /* ========================================
+     SECTION FIXES
+     ======================================== */
+  .section {
+    padding: 48px 16px;
+  }
+  
+  /* ========================================
+     CARD FIXES
+     ======================================== */
+  .experience-card,
+  .education-card,
+  .language-card,
+  .certificate-card {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .experience-header,
+  .education-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  /* ========================================
+     SKILLS FIXES
+     ======================================== */
+  .skills-grid {
+    gap: 8px;
+  }
+  
+  .skill-tag {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+  
+  /* ========================================
+     LANGUAGES FIXES
+     ======================================== */
+  .languages-list {
+    grid-template-columns: 1fr;
+  }
+  
+  /* ========================================
+     CERTIFICATES FIXES
+     ======================================== */
+  .certificates-list {
+    grid-template-columns: 1fr;
+  }
+  
+  /* ========================================
+     CONTACT FIXES
+     ======================================== */
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .contact-details {
+    gap: 12px;
+  }
+  
+  .contact-detail-item {
+    padding: 12px;
+  }
+  
+  /* ========================================
+     FORM FIXES
+     ======================================== */
+  .form-group input,
+  .form-group textarea {
+    padding: 12px;
+    min-height: 44px;
+    font-size: 16px;
+  }
+  
+  .submit-button {
+    width: 100%;
+    padding: 14px 24px;
+    min-height: 44px;
+  }
+  
+  /* ========================================
+     FOOTER FIXES
+     ======================================== */
+  footer {
+    padding: 32px 16px;
+  }
+  
+  /* ========================================
+     ARCHIVE/SLIDESHOW FIXES
+     ======================================== */
+  .slideshow-container {
+    aspect-ratio: 16 / 9;
+  }
+  
+  .slideshow-button {
+    padding: 12px 16px;
+    font-size: 24px;
+  }
+  
+  .slideshow-play-pause {
+    padding: 10px 14px;
+    font-size: 16px;
+  }
+  
+  /* ========================================
+     PREVENT HORIZONTAL SCROLLING
+     ======================================== */
+  body {
+    overflow-x: hidden;
+  }
+  
+  * {
+    max-width: 100%;
+  }
+  
+  /* ========================================
+     IMPROVE TOUCH TARGETS
+     ======================================== */
+  button,
+  a,
+  input,
+  textarea {
+    min-height: 44px;
+  }
+}
+
+/* ========================================
+   TABLET FIXES (769px - 1024px)
+   ======================================== */
+@media (min-width: 769px) and (max-width: 1024px) {
+  
+  .section {
+    padding: 64px 32px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: row;
+    max-width: none;
+  }
+  
+  .hero-button {
+    width: auto;
+  }
+  
+  .languages-list {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+  
+  .certificates-list {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
