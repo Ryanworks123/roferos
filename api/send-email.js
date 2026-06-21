@@ -1,14 +1,11 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
 export default async function handler(req, res) {
-  console.log('API route called');
-  
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   const { name, email, subject, message } = req.body;
-  console.log('Request body:', { name, email, subject, message });
 
   // Validate input
   if (!name || !email || !subject || !message) {
@@ -16,12 +13,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Hardcoded credentials for Vercel deployment
-    const EMAIL_USER = 'ryanroferos.work@gmail.com';
-    const EMAIL_PASS = 'zrkx omps ukiv jnsn';
-    
-    console.log('Creating transporter with credentials');
-    
+    const EMAIL_USER = process.env.EMAIL_USER;
+    const EMAIL_PASS = process.env.EMAIL_PASS;
+
+    if (!EMAIL_USER || !EMAIL_PASS) {
+      console.error('Missing EMAIL_USER or EMAIL_PASS environment variables');
+      return res.status(500).json({ error: 'Email service not configured' });
+    }
+
     // Create transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -30,8 +29,6 @@ export default async function handler(req, res) {
         pass: EMAIL_PASS
       }
     });
-
-    console.log('Transporter created');
 
     // Email to portfolio owner
     const ownerMailOptions = {
@@ -42,7 +39,7 @@ export default async function handler(req, res) {
         Name: ${name}
         Email: ${email}
         Subject: ${subject}
-        
+
         Message:
         ${message}
       `,
@@ -63,13 +60,13 @@ export default async function handler(req, res) {
       subject: 'Message Received - Ryan Roferos Portfolio',
       text: `
         Hi ${name},
-        
+
         Thank you for reaching out! I have received your message and will get back to you as soon as possible.
-        
+
         Your message:
         Subject: ${subject}
         ${message}
-        
+
         Best regards,
         Ryan Roferos
       `,
@@ -88,10 +85,10 @@ export default async function handler(req, res) {
     // Send both emails
     await transporter.sendMail(ownerMailOptions);
     await transporter.sendMail(confirmationMailOptions);
-    
-    res.status(200).json({ success: true, message: 'Email sent successfully' });
+
+    return res.status(200).json({ success: true, message: 'Email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to send email' });
+    return res.status(500).json({ error: 'Failed to send email', details: error.message });
   }
 }
