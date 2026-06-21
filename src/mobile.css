@@ -1,6 +1,7 @@
-/* Mobile-Only CSS - Overrides for mobile devices */
+/* Mobile-Only CSS - Optimized for mobile devices */
 /* This file uses media queries to target mobile devices only */
 /* Import AFTER index.css to override only on mobile */
+/* Clean, organized, and smooth mobile experience */
 
 /* ========================================
    MOBILE BREAKPOINT (768px and below)
@@ -8,11 +9,31 @@
 @media (max-width: 768px) {
   
   /* ========================================
-     HEADER FIXES
+     GLOBAL MOBILE OPTIMIZATIONS
+     ======================================== */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* ========================================
+     HEADER & NAVIGATION
      ======================================== */
   header {
     height: 56px;
     padding: 0 16px;
+    background: rgba(10, 14, 39, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
   
   header h1 {
@@ -26,9 +47,38 @@
     gap: 8px;
   }
   
-  /* ========================================
-     NAVIGATION FIXES
-     ======================================== */
+  /* Hamburger button - smooth animation */
+  .hamburger {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .hamburger:active {
+    transform: scale(0.95);
+    background: rgba(59, 130, 246, 0.2);
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #ffffff;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+  
+  /* Mobile navigation menu - smooth slide-in */
   .nav-menu {
     position: fixed;
     top: 56px;
@@ -37,10 +87,11 @@
     bottom: 0;
     background: #0a0e27;
     transform: translateX(100%);
-    transition: transform 0.25s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 999;
-    padding: 24px;
+    padding: 24px 16px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .nav-menu.open {
@@ -49,51 +100,32 @@
   
   .nav-menu ul {
     flex-direction: column;
-    gap: 8px;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
   }
   
   .nav-menu a {
     padding: 16px;
     font-size: 1rem;
-    min-height: 44px;
+    min-height: 48px;
     display: flex;
     align-items: center;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
   
-  /* Hamburger button - show only on mobile */
-  .hamburger {
-    display: flex;
-    width: 44px;
-    height: 44px;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    border-radius: 8px;
-    transition: background 0.15s ease;
-  }
-  
-  .hamburger:hover {
-    background: rgba(59, 130, 246, 0.1);
-  }
-  
-  .hamburger span {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: #ffffff;
-    margin: 4px 0;
-    transition: all 0.25s ease;
-    border-radius: 2px;
+  .nav-menu a:active {
+    background: rgba(59, 130, 246, 0.2);
+    transform: scale(0.98);
   }
   
   /* ========================================
-     HERO SECTION FIXES
+     HERO SECTION
      ======================================== */
   .hero-section {
-    padding: 64px 16px;
+    padding: 48px 16px 64px;
     min-height: calc(100vh - 56px);
   }
   
@@ -109,23 +141,28 @@
   
   .hero-image {
     order: 1;
-    margin-bottom: 16px;
+    margin-bottom: 0;
   }
   
   .hero-image img {
-    max-height: 300px;
+    max-height: 280px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   }
   
   .hero-title {
     font-size: 1.75rem;
+    line-height: 1.2;
   }
   
   .hero-subtitle {
-    font-size: 1.125rem;
+    font-size: 1rem;
+    margin-bottom: 16px;
   }
   
   .hero-description {
     font-size: 0.875rem;
+    line-height: 1.7;
     text-align: justify;
     text-justify: inter-word;
   }
@@ -135,31 +172,48 @@
     width: 100%;
     max-width: 280px;
     margin: 0 auto;
+    gap: 12px;
   }
   
   .hero-button {
     width: 100%;
     padding: 14px 24px;
-    min-height: 44px;
+    min-height: 48px;
     text-align: center;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .hero-button:active {
+    transform: scale(0.98);
   }
   
   /* ========================================
-     SECTION FIXES
+     SECTIONS
      ======================================== */
   .section {
     padding: 48px 16px;
   }
   
   /* ========================================
-     CARD FIXES
+     CARDS
      ======================================== */
   .experience-card,
   .education-card,
   .language-card,
   .certificate-card {
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    transition: all 0.2s ease;
+  }
+  
+  .experience-card:active,
+  .education-card:active,
+  .language-card:active,
+  .certificate-card:active {
+    transform: scale(0.98);
   }
   
   .experience-header,
@@ -169,33 +223,44 @@
   }
   
   /* ========================================
-     SKILLS FIXES
+     SKILLS
      ======================================== */
   .skills-grid {
     gap: 8px;
   }
   
   .skill-tag {
-    padding: 8px 16px;
+    padding: 10px 16px;
     font-size: 0.875rem;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .skill-tag:active {
+    transform: scale(0.95);
   }
   
   /* ========================================
-     LANGUAGES FIXES
+     LANGUAGES
      ======================================== */
   .languages-list {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   /* ========================================
-     CERTIFICATES FIXES
+     CERTIFICATES
      ======================================== */
   .certificates-list {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
   
   /* ========================================
-     CONTACT FIXES
+     CONTACT
      ======================================== */
   .contact-content {
     grid-template-columns: 1fr;
@@ -207,98 +272,125 @@
   }
   
   .contact-detail-item {
-    padding: 12px;
+    padding: 14px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .contact-detail-item:active {
+    transform: scale(0.98);
   }
   
   /* ========================================
-     FORM FIXES
+     FORMS
      ======================================== */
+  .contact-form {
+    gap: 16px;
+  }
+  
   .form-group input,
   .form-group textarea {
-    padding: 12px;
-    min-height: 44px;
+    padding: 14px 16px;
+    min-height: 48px;
     font-size: 16px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    transform: scale(1.01);
   }
   
   .submit-button {
     width: 100%;
     padding: 14px 24px;
-    min-height: 44px;
+    min-height: 48px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .submit-button:active {
+    transform: scale(0.98);
   }
   
   /* ========================================
-     FOOTER FIXES
+     FOOTER
      ======================================== */
   footer {
     padding: 32px 16px;
   }
   
   /* ========================================
-     ARCHIVE/SLIDESHOW FIXES
+     ARCHIVE/SLIDESHOW
      ======================================== */
   .slideshow-container {
     aspect-ratio: 16 / 9;
+    border-radius: 16px;
   }
   
   .slideshow-button {
     padding: 12px 16px;
     font-size: 24px;
+    min-width: 44px;
+    min-height: 44px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .slideshow-button:active {
+    transform: scale(0.95);
   }
   
   .slideshow-play-pause {
     padding: 10px 14px;
     font-size: 16px;
+    min-width: 40px;
+    min-height: 40px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .slideshow-play-pause:active {
+    transform: scale(0.95);
+  }
+  
+  .slideshow-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .slideshow-dot:active {
+    transform: scale(1.2);
   }
   
   /* ========================================
-     PREVENT HORIZONTAL SCROLLING
-     ======================================== */
-  body {
-    overflow-x: hidden;
-  }
-  
-  * {
-    max-width: 100%;
-  }
-  
-  /* ========================================
-     IMPROVE TOUCH TARGETS
+     TOUCH TARGETS
      ======================================== */
   button,
   a,
   input,
-  textarea {
+  textarea,
+  .slideshow-button,
+  .slideshow-play-pause {
     min-height: 44px;
+    min-width: 44px;
   }
-}
-
-/* ========================================
-   TABLET FIXES (769px - 1024px)
+  
+  /* ========================================
+   SMOOTH SCROLL & PERFORMANCE
    ======================================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-  
-  .section {
-    padding: 64px 32px;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: row;
-    max-width: none;
-  }
-  
-  .hero-button {
-    width: auto;
-  }
-  
-  .languages-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-  
-  .certificates-list {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 }
