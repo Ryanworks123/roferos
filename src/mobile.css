@@ -1,303 +1,438 @@
-/* Mobile-Only CSS - Overrides for mobile devices */
-/* This file uses media queries to target mobile devices only */
-/* Import AFTER index.css to override only on mobile */
+/* ============================================================
+   mobile.css — Enhancement layer for mobile/tablet
+   Loaded AFTER index.css. Only overrides what index.css
+   doesn't handle well at small viewports.
+   ============================================================ */
 
-/* ========================================
-   MOBILE BREAKPOINT (768px and below)
-   ======================================== */
-@media (max-width: 768px) {
-  
-  /* ========================================
-     HEADER FIXES
-     ======================================== */
+/* ============================================================
+   HAMBURGER — hidden by default (desktop shows full nav)
+   ============================================================ */
+.hamburger {
+  display: none;
+}
+
+/* Mobile Nav Drawer - hidden on desktop */
+.mobile-nav {
+  display: none;
+}
+
+/* ============================================================
+   TABLET  769px – 1024px
+   ============================================================ */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  /* Fix index.css stacking the header vertically at 1024px */
   header {
-    height: 56px;
-    padding: 0 16px;
+    flex-direction: row;
+    gap: 0;
+    padding: 0 24px;
+    height: 64px;
   }
-  
-  header h1 {
-    font-size: 1rem;
-    line-height: 1;
-  }
-  
-  header h1 a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  /* ========================================
-     NAVIGATION FIXES
-     ======================================== */
-  .nav-menu {
-    position: fixed;
-    top: 56px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #0a0e27;
-    transform: translateX(100%);
-    transition: transform 0.25s ease;
-    z-index: 999;
-    padding: 24px;
-    overflow-y: auto;
-  }
-  
-  .nav-menu.open {
-    transform: translateX(0);
-  }
-  
+
+  /* Keep nav horizontal on tablet */
   .nav-menu ul {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .nav-menu a {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  main {
+    padding-top: 64px;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .hero-title    { font-size: 2.25rem; }
+  .hero-subtitle { font-size: 1.25rem; }
+
+  .certificates-list {
+    grid-template-columns: 1fr;
+  }
+
+  .languages-list {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* ============================================================
+   MOBILE  ≤ 768px
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ── PREVENT HORIZONTAL OVERFLOW ── */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* ── HEADER ── */
+  header {
+    height: 54px;
+    padding: 0 18px;
+  }
+
+  .header-logo {
     gap: 8px;
   }
-  
-  .nav-menu a {
-    padding: 16px;
-    font-size: 1rem;
-    min-height: 44px;
-    display: flex;
-    align-items: center;
+
+  .initials-logo {
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid rgba(0, 0, 0, 0.15);
+    object-fit: contain;
   }
-  
-  /* Hamburger button - show only on mobile */
+
+  .header-name {
+    font-size: 13px;
+  }
+
+  .header-role {
+    font-size: 11px;
+  }
+
+  /* Hide desktop nav on mobile */
+  .nav-menu:not(.mobile-nav) {
+    display: none;
+  }
+
+  /* ── HAMBURGER ── */
   .hamburger {
     display: flex;
-    width: 44px;
-    height: 44px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
+    gap: 4px;
+    width: 32px;
+    height: 32px;
     padding: 0;
-    border-radius: 8px;
+    background: transparent;
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
+    border-radius: 7px;
+    cursor: pointer;
     transition: background 0.15s ease;
+    flex-shrink: 0;
   }
-  
+
   .hamburger:hover {
-    background: rgba(59, 130, 246, 0.1);
+    background: var(--color-background-secondary);
   }
-  
+
   .hamburger span {
     display: block;
-    width: 24px;
-    height: 2px;
-    background: #ffffff;
-    margin: 4px 0;
-    transition: all 0.25s ease;
+    width: 14px;
+    height: 1.5px;
+    background: var(--color-text-primary);
     border-radius: 2px;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
   }
-  
-  /* ========================================
-     HERO SECTION FIXES
-     ======================================== */
+
+  /* X animation when open */
+  .hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-nav {
+    display: block;
+    position: fixed;
+    top: 54px;
+    left: 0;
+    right: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--color-background-primary);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+    z-index: 99;
+    padding: 0 12px 0;
+  }
+
+  .mobile-nav.open {
+    max-height: 500px;
+    padding: 8px 12px 16px;
+  }
+
+  .nav-section {
+    margin-bottom: 4px;
+  }
+
+  .nav-section-label {
+    font-size: 10px;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 8px 8px 4px;
+  }
+
+  .nav-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 8px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: background 0.15s ease;
+  }
+
+  .nav-item i {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    width: 18px;
+  }
+
+  .nav-item:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .nav-item.active {
+    background: var(--color-background-secondary);
+    font-weight: 500;
+  }
+
+  .nav-item.active i {
+    color: var(--color-text-primary);
+  }
+
+  .nav-divider {
+    height: 0.5px;
+    background: rgba(0, 0, 0, 0.15);
+    margin: 6px 0;
+  }
+
+  .nav-contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 0.5px solid rgba(0, 0, 0, 0.4);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    background: transparent;
+    text-decoration: none;
+    transition: background 0.15s ease, transform 0.15s ease;
+    margin-top: 8px;
+  }
+
+  .nav-contact-button:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .nav-contact-button:active {
+    transform: scale(0.98);
+  }
+
+  /* ── MAIN OFFSET (fixed header = 54px) ── */
+  main {
+    padding-top: 74px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 40px 16px;
+  }
+
+  .archive-section {
+    padding: 40px 16px;
+  }
+
+  /* ── HERO ── */
   .hero-section {
-    padding: 64px 16px;
-    min-height: calc(100vh - 56px);
+    min-height: calc(100svh - 56px);
+    padding: 48px 16px 40px;
+    align-items: flex-start;
   }
-  
+
   .hero-content {
-    flex-direction: column;
-    gap: 32px;
+    grid-template-columns: 1fr;
+    gap: 28px;
   }
-  
-  .hero-text {
-    text-align: center;
-    order: 2;
-  }
-  
+
   .hero-image {
-    order: 1;
-    margin-bottom: 16px;
+    order: -1;                    /* image on top */
   }
-  
+
   .hero-image img {
-    max-height: 300px;
-  }
-  
-  .hero-title {
-    font-size: 1.75rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.125rem;
-  }
-  
-  .hero-description {
-    font-size: 0.875rem;
-    text-align: justify;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    width: 100%;
-    max-width: 280px;
+    max-height: 260px;
+    width: auto;
+    display: block;
     margin: 0 auto;
   }
-  
-  .hero-button {
-    width: 100%;
-    padding: 14px 24px;
-    min-height: 44px;
+
+  .hero-text {
     text-align: center;
   }
-  
-  /* ========================================
-     SECTION FIXES
-     ======================================== */
-  .section {
-    padding: 48px 16px;
+
+  .hero-title {
+    font-size: clamp(1.6rem, 7vw, 2.25rem);
+    letter-spacing: -0.5px;
   }
-  
-  /* ========================================
-     CARD FIXES
-     ======================================== */
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 4.5vw, 1.25rem);
+  }
+
+  .hero-description {
+    font-size: 0.9375rem;
+    text-align: left;
+    line-height: 1.75;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .hero-button {
+    width: 100%;
+    padding: 13px 24px;
+    min-height: 48px;
+    text-align: center;
+    font-size: 0.9375rem;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  /* ── CARDS ── */
   .experience-card,
   .education-card,
   .language-card,
   .certificate-card {
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 16px;
   }
-  
+
   .experience-header,
   .education-header {
     flex-direction: column;
     gap: 8px;
+    align-items: flex-start;
   }
-  
-  /* ========================================
-     SKILLS FIXES
-     ======================================== */
+
+  .experience-duration,
+  .education-period {
+    align-self: flex-start;
+  }
+
+  /* ── SKILLS ── */
   .skills-grid {
     gap: 8px;
   }
-  
+
   .skill-tag {
-    padding: 8px 16px;
-    font-size: 0.875rem;
+    padding: 8px 14px;
+    font-size: 0.8125rem;
   }
-  
-  /* ========================================
-     LANGUAGES FIXES
-     ======================================== */
-  .languages-list {
-    grid-template-columns: 1fr;
-  }
-  
-  /* ========================================
-     CERTIFICATES FIXES
-     ======================================== */
+
+  /* ── LANGUAGES / CERTIFICATES ── */
+  .languages-list,
   .certificates-list {
     grid-template-columns: 1fr;
-  }
-  
-  /* ========================================
-     CONTACT FIXES
-     ======================================== */
-  .contact-content {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  
-  .contact-details {
     gap: 12px;
   }
-  
+
+  /* ── CONTACT ── */
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
   .contact-detail-item {
     padding: 12px;
   }
-  
-  /* ========================================
-     FORM FIXES
-     ======================================== */
+
+  .contact-detail-item:hover {
+    transform: none;             /* disable slide on mobile (no hover) */
+  }
+
+  /* ── FORM ── */
   .form-group input,
   .form-group textarea {
-    padding: 12px;
-    min-height: 44px;
-    font-size: 16px;
+    padding: 12px 14px;
+    font-size: 16px;              /* prevents iOS zoom */
   }
-  
+
   .submit-button {
     width: 100%;
-    padding: 14px 24px;
-    min-height: 44px;
+    min-height: 48px;
   }
-  
-  /* ========================================
-     FOOTER FIXES
-     ======================================== */
-  footer {
-    padding: 32px 16px;
-  }
-  
-  /* ========================================
-     ARCHIVE/SLIDESHOW FIXES
-     ======================================== */
+
+  /* ── SLIDESHOW ── */
   .slideshow-container {
     aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    position: relative;
   }
-  
-  .slideshow-button {
-    padding: 12px 16px;
-    font-size: 24px;
-  }
-  
-  .slideshow-play-pause {
-    padding: 10px 14px;
-    font-size: 16px;
-  }
-  
-  /* ========================================
-     PREVENT HORIZONTAL SCROLLING
-     ======================================== */
-  body {
-    overflow-x: hidden;
-  }
-  
-  * {
-    max-width: 100%;
-  }
-  
-  /* ========================================
-     IMPROVE TOUCH TARGETS
-     ======================================== */
-  button,
-  a,
-  input,
-  textarea {
-    min-height: 44px;
-  }
-}
 
-/* ========================================
-   TABLET FIXES (769px - 1024px)
-   ======================================== */
-@media (min-width: 769px) and (max-width: 1024px) {
-  
-  .section {
-    padding: 64px 32px;
+  .slideshow-image {
+    width: 100%;
+    height: auto;
   }
-  
-  .hero-title {
-    font-size: 2.5rem;
+
+  .slideshow-button {
+    padding: 8px 12px;
+    font-size: 1rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
-  
-  .hero-buttons {
-    flex-direction: row;
-    max-width: none;
+
+  .slideshow-prev {
+    left: 0;
   }
-  
-  .hero-button {
-    width: auto;
+
+  .slideshow-next {
+    right: 0;
   }
-  
-  .languages-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+
+  .slideshow-dots {
+    display: none;
   }
-  
-  .certificates-list {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  .slideshow-play-pause {
+    padding: 8px 12px;
+    font-size: 0.875rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 24px 16px;
+  }
+
+  /* ── TOUCH TARGET FLOOR ── */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
   }
 }
