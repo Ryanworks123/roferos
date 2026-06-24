@@ -308,6 +308,7 @@
     align-items: stretch;
     max-width: 300px;
     margin: 0 auto;
+    gap: 12px;
   }
 
   .hero-button {
@@ -316,6 +317,8 @@
     min-height: 48px;
     text-align: center;
     font-size: 0.9375rem;
+    margin: 0;
+    box-sizing: border-box;
   }
 
   /* ── TYPOGRAPHY ── */
