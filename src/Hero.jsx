@@ -1,44 +1,78 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import profileImage from './assets/profile.jpg';
+import { Suspense, lazy } from "react";
+import { motion } from "framer-motion";
+import profileImage from "./assets/profile.jpg";
+import LinkButton from "./components/LinkButton";
+import { profile, skills } from "./data/portfolio";
+
+const HeroScene = lazy(() => import("./components/HeroScene"));
 
 function Hero() {
+  const coreSkills = skills
+    .find((group) => group.category === "Frontend")
+    .items.slice(0, 4);
+
   return (
-    <section id="hero" className="section hero-section">
-      <div className="container">
+    <section id="hero" className="hero-section" aria-labelledby="hero-title">
+      <div className="hero-grid">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          className="hero-copy"
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="hero-content"
+          transition={{ duration: 0.55, ease: "easeOut" }}
         >
-          <div className="hero-text">
-            <h1 className="hero-title">I'm Ryan Roferos</h1>
-            <h2 className="hero-subtitle">Information Technology Professional</h2>
-            <p className="hero-description">
-              Information Technology graduate with hands-on experience in technical sales, 
-              customer service, hardware and software support, PC assembly, troubleshooting, 
-              and system installation. Completed a 540-hour Internship at MAKOTEK Computer 
-              Sales Inc. assisting customers with product recommendations, compatibility 
-              assessments, and after-sales support. Strong communication, problem-solving, 
-              and technical skills with a commitment to delivering excellent customer 
-              experiences and business results.
-            </p>
-            <div className="hero-buttons">
-              <a href="CV.pdf" className="hero-button primary" target="_blank" rel="noopener noreferrer">Check Resume</a>
-              <a href="#contact" className="hero-button primary">Get in Touch</a>
-              <a href="#experience" className="hero-button secondary">View Experience</a>
+          <p className="eyebrow">{profile.headline}</p>
+          <h1 id="hero-title">{profile.name}</h1>
+          <p className="hero-role">{profile.role}</p>
+          <p className="hero-summary">{profile.summary}</p>
+
+          <dl className="hero-meta" aria-label="Profile details">
+            <div>
+              <dt>Location</dt>
+              <dd>{profile.location}</dd>
+            </div>
+            <div>
+              <dt>Focus</dt>
+              <dd>Responsive frontend applications</dd>
+            </div>
+          </dl>
+
+          <div className="hero-actions" aria-label="Primary links">
+            <LinkButton href="#projects" variant="primary">
+              View Projects
+            </LinkButton>
+            <LinkButton href={profile.resume} target="_blank" rel="noreferrer">
+              Resume
+            </LinkButton>
+            <LinkButton href={profile.linkedIn} target="_blank" rel="noreferrer">
+              LinkedIn
+            </LinkButton>
+            <LinkButton href={`mailto:${profile.email}`}>Email</LinkButton>
+            <LinkButton href={profile.github} disabledLabel="GitHub link not listed">
+              GitHub
+            </LinkButton>
+          </div>
+        </motion.div>
+
+        <motion.aside
+          className="hero-card"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.12, ease: "easeOut" }}
+          aria-label="Frontend profile summary"
+        >
+          <Suspense fallback={<div className="hero-scene"><div className="scene-skeleton" /></div>}>
+            <HeroScene />
+          </Suspense>
+          <img src={profileImage} alt="Ryan Roferos" width="420" height="420" loading="eager" />
+          <div className="hero-card-body">
+            <p>Frontend toolkit</p>
+            <div className="mini-skill-row">
+              {coreSkills.map((skill) => (
+                <span key={skill}>{skill}</span>
+              ))}
             </div>
           </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="hero-image"
-          >
-            <img src={profileImage} alt="profile.jpg" loading="lazy" />
-          </motion.div>
-        </motion.div>
+        </motion.aside>
       </div>
     </section>
   );

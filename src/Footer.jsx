@@ -1,9 +1,9 @@
-import React from 'react';
+import { profile } from "./data/portfolio";
 
 function Footer() {
   return (
-    <footer>
-      <p>&copy; {new Date().getFullYear()} Ryan's Portfolio</p>
+    <footer className="site-footer">
+      <p>© {new Date().getFullYear()} {profile.name}. Frontend Developer portfolio.</p>
     </footer>
   );
 }
