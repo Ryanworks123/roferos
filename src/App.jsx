@@ -37,8 +37,8 @@ const navItems = [
 ];
 
 const roleTitles = ["Ship responsive React interfaces", "Turn requirements into usable UI", "Build accessible product experiences", "Solve frontend problems clearly"];
-const internshipImage = "/images/photo_6176801367456943769_y.jpg";
-const teamImage = "/images/photo_6176801367456943788_y.jpg";
+const internshipImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943769_y.jpg`;
+const teamImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943788_y.jpg`;
 const projectKinds = ["All", "Frontend", "System", "Design"];
 
 const projectMeta = [

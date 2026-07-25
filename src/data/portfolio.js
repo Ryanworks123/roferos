@@ -1,3 +1,5 @@
+const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+
 export const profile = {
   name: "Ryan Roferos",
   role: "Frontend Developer",
@@ -8,7 +10,7 @@ export const profile = {
   linkedIn: "https://www.linkedin.com/in/ryanganiii",
   github: "",
   portfolio: "",
-  resume: "/Ryan_Roferos_Resume.pdf",
+  resume: publicAsset("Ryan_Roferos_Resume.pdf"),
   summary:
     "Information Technology graduate with hands-on experience in technical support, troubleshooting, customer assistance, and frontend development. Completed a 540-hour internship at MAKOTEK Computer Sales Inc. and builds responsive web applications using React, Next.js, TypeScript, HTML, CSS, JavaScript, and Tailwind CSS.",
 };
@@ -157,7 +159,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "xkqyrsr5fq46",
-    image: "/certificates/certificate-xkqyrsr5fq46-1784964350.jpg",
+    image: publicAsset("certificates/certificate-xkqyrsr5fq46-1784964350.jpg"),
     featured: true,
   },
   {
@@ -165,7 +167,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "mcp6stwx2ugr",
-    image: "/certificates/certificate-mcp6stwx2ugr-1784961375.jpg",
+    image: publicAsset("certificates/certificate-mcp6stwx2ugr-1784961375.jpg"),
     featured: true,
   },
   {
@@ -173,7 +175,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "9efge4tngs6r",
-    image: "/certificates/certificate-9efge4tngs6r-1784961072.jpg",
+    image: publicAsset("certificates/certificate-9efge4tngs6r-1784961072.jpg"),
     featured: true,
   },
   {
@@ -181,7 +183,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "egtzh73xk7kx",
-    image: "/certificates/certificate-egtzh73xk7kx-1783768137.jpg",
+    image: publicAsset("certificates/certificate-egtzh73xk7kx-1783768137.jpg"),
     featured: true,
   },
   {
@@ -189,7 +191,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "u68f9xewbsqs",
-    image: "/certificates/certificate-u68f9xewbsqs-1783766354.jpg",
+    image: publicAsset("certificates/certificate-u68f9xewbsqs-1783766354.jpg"),
     featured: true,
   },
   {
@@ -197,7 +199,7 @@ export const certifications = [
     issuer: "Anthropic",
     issued: "Jul 2026",
     credentialId: "dhr6ax6ezvj2",
-    image: "/certificates/certificate-dhr6ax6ezvj2-1784964751.jpg",
+    image: publicAsset("certificates/certificate-dhr6ax6ezvj2-1784964751.jpg"),
     featured: true,
   },
   { name: "JavaScript Programming", issuer: "Bro Code", duration: "8 hours" },
