@@ -428,37 +428,54 @@ function Stack() {
 
 function Contact() {
   const [errors, setErrors] = useState({});
-  const [toast, setToast] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [toast, setToast] = useState(() => new URLSearchParams(window.location.search).get("sent") === "1");
+
+  useEffect(() => {
+    if (!toast) return undefined;
+    const cleanUrl = `${window.location.pathname}${window.location.hash || "#contact"}`;
+    window.history.replaceState({}, "", cleanUrl);
+    const timer = window.setTimeout(() => setToast(false), 6000);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
+
   const submit = (event) => {
-    event.preventDefault();
     const data = new FormData(event.currentTarget);
     const next = {};
     if (!data.get("name")?.trim()) next.name = "Please enter your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.get("email") || "")) next.email = "Enter a valid email address.";
     if ((data.get("message") || "").trim().length < 10) next.message = "Please add at least 10 characters.";
     setErrors(next);
-    if (Object.keys(next).length) return;
-    const subject = encodeURIComponent(`Portfolio inquiry from ${data.get("name")}`);
-    const body = encodeURIComponent(`Name: ${data.get("name")}\nEmail: ${data.get("email")}\n\n${data.get("message")}`);
-    setToast(true);
-    window.setTimeout(() => setToast(false), 3600);
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`;
-    event.currentTarget.reset();
+    if (Object.keys(next).length) {
+      event.preventDefault();
+      return;
+    }
+    setSubmitting(true);
   };
   return (
     <section id="contact" className="section contact-section grid-shell">
       <SectionIntro index="06" kicker="Start a conversation" title="Let’s build something useful." copy="I’m open to frontend opportunities where thoughtful interfaces, continuous learning, and practical problem solving matter." />
       <div className="contact-layout">
         <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href={`mailto:${profile.email}`} icon={Mail}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
-        <form className="contact-form" onSubmit={submit} noValidate>
+        <form className="contact-form" action={`https://formsubmit.co/${profile.email}`} method="POST" onSubmit={submit} noValidate>
+          <input type="hidden" name="_subject" value="New portfolio inquiry for Ryan Roferos" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://ryanworks123.github.io/roferos/?sent=1#contact" />
+          <input type="hidden" name="_url" value="https://ryanworks123.github.io/roferos/#contact" />
+          <input
+            type="hidden"
+            name="_autoresponse"
+            value="Thank you for contacting Ryan Roferos. Your message has been received at ryanroferos.work@gmail.com. Ryan will review your inquiry and reply as soon as possible. This is an automated confirmation."
+          />
+          <input type="text" name="_honey" tabIndex="-1" autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
           <div className="form-head"><Layers3 size={20} /><span>New message</span></div>
           <label><span>Name</span><input name="name" autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} placeholder="Your name" />{errors.name && <em id="name-error">{errors.name}</em>}</label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="you@company.com" />{errors.email && <em id="email-error">{errors.email}</em>}</label>
           <label><span>Message</span><textarea name="message" rows="5" aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "message-error" : undefined} placeholder="Tell me about the role or project." />{errors.message && <em id="message-error">{errors.message}</em>}</label>
-          <button className="action" type="submit">Prepare email <Send size={17} /></button>
+          <button className="action" type="submit" disabled={submitting}>{submitting ? "Sending…" : "Send message"} <Send size={17} /></button>
         </form>
       </div>
-      <AnimatePresence>{toast && <motion.div className="toast" role="status" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}><Check size={18} />Message prepared in your email app.</motion.div>}</AnimatePresence>
+      <AnimatePresence>{toast && <motion.div className="toast" role="status" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}><Check size={18} /><span><strong>Message sent to Ryan.</strong>A confirmation receipt was sent to your email.</span></motion.div>}</AnimatePresence>
     </section>
   );
 }
