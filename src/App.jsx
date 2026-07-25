@@ -116,11 +116,11 @@ function IconButton({ label, children, ...props }) {
   );
 }
 
-function Action({ href, children, icon: Icon = ArrowRight, secondary = false, download = false, disabled = false }) {
+function Action({ href, children, icon: Icon = ArrowRight, secondary = false, download = false, disabled = false, ...props }) {
   const className = `action${secondary ? " action-secondary" : ""}${disabled ? " is-disabled" : ""}`;
   if (disabled) return <span className={className} aria-disabled="true">{children}<Icon size={17} /></span>;
   return (
-    <a className={className} href={href} download={download || undefined} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+    <a className={className} href={href} download={download || undefined} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer" {...props}>
       {children}<Icon size={17} aria-hidden="true" />
     </a>
   );
@@ -480,12 +480,20 @@ function Contact() {
       setSubmitting(false);
     }
   };
+
+  const focusComposer = (event) => {
+    event.preventDefault();
+    const form = document.querySelector("#contact-form");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    form?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
+    window.setTimeout(() => form?.elements.name?.focus({ preventScroll: true }), reducedMotion ? 0 : 450);
+  };
   return (
     <section id="contact" className="section contact-section grid-shell">
       <SectionIntro index="06" kicker="Start a conversation" title="Let’s build something useful." copy="I’m open to frontend opportunities where thoughtful interfaces, continuous learning, and practical problem solving matter." />
       <div className="contact-layout">
-        <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href={`mailto:${profile.email}`} icon={Mail}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
-        <form className="contact-form" onSubmit={submit} noValidate>
+        <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href="#contact-form" icon={Mail} onClick={focusComposer}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
+        <form id="contact-form" className="contact-form" onSubmit={submit} noValidate>
           <input type="text" name="website" tabIndex="-1" autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
           <div className="form-head"><Layers3 size={20} /><span>New message</span></div>
           <label><span>Name</span><input name="name" autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} placeholder="Your name" />{errors.name && <em id="name-error">{errors.name}</em>}</label>
