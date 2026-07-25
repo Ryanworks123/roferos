@@ -152,6 +152,54 @@ export const projects = [
 ];
 
 export const certifications = [
+  {
+    name: "Introduction to Agent Skills",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "xkqyrsr5fq46",
+    image: "/certificates/certificate-xkqyrsr5fq46-1784964350.jpg",
+    featured: true,
+  },
+  {
+    name: "Claude Platform 101",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "mcp6stwx2ugr",
+    image: "/certificates/certificate-mcp6stwx2ugr-1784961375.jpg",
+    featured: true,
+  },
+  {
+    name: "Claude Code in Action",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "9efge4tngs6r",
+    image: "/certificates/certificate-9efge4tngs6r-1784961072.jpg",
+    featured: true,
+  },
+  {
+    name: "Building with the Claude API",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "egtzh73xk7kx",
+    image: "/certificates/certificate-egtzh73xk7kx-1783768137.jpg",
+    featured: true,
+  },
+  {
+    name: "AI Fluency: Framework & Foundations",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "u68f9xewbsqs",
+    image: "/certificates/certificate-u68f9xewbsqs-1783766354.jpg",
+    featured: true,
+  },
+  {
+    name: "AI Fluency: AI Capabilities & Limitations",
+    issuer: "Anthropic",
+    issued: "Jul 2026",
+    credentialId: "dhr6ax6ezvj2",
+    image: "/certificates/certificate-dhr6ax6ezvj2-1784964751.jpg",
+    featured: true,
+  },
   { name: "JavaScript Programming", issuer: "Bro Code", duration: "8 hours" },
   { name: "HTML and CSS", issuer: "Telugu", duration: "9 hours and 7 minutes" },
   { name: "PHP for Web Development", issuer: "CodeMy", duration: "2 hours and 33 minutes" },
@@ -179,8 +227,9 @@ export const education = [
     period: "2025 - 2026",
   },
   {
-    degree: "General Academic Strand",
-    institution: "Tagoloan National Senior High School",
+    degree: "ABM Strand",
+    institution: "Talisayan National Senior High School",
+    location: "San Jose",
     period: "2021 - 2022",
   },
   {

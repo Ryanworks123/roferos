@@ -21,10 +21,10 @@ function PageLoader() {
           transition={{ duration: 0.35 }}
           role="status"
           aria-live="polite"
-          aria-label="Loading portfolio"
+          aria-label="Loading ARCADEVERSE"
         >
           <div className="loader-card">
-            <div className="loader-mark">RR</div>
+            <div className="loader-mark">AV</div>
             <div className="loader-lines" aria-hidden="true">
               <span />
               <span />
