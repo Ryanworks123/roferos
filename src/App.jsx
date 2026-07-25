@@ -429,45 +429,64 @@ function Stack() {
 function Contact() {
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-  const [toast, setToast] = useState(() => new URLSearchParams(window.location.search).get("sent") === "1");
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     if (!toast) return undefined;
-    const cleanUrl = `${window.location.pathname}${window.location.hash || "#contact"}`;
-    window.history.replaceState({}, "", cleanUrl);
     const timer = window.setTimeout(() => setToast(false), 6000);
     return () => window.clearTimeout(timer);
   }, [toast]);
 
-  const submit = (event) => {
-    const data = new FormData(event.currentTarget);
+  const submit = async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const next = {};
     if (!data.get("name")?.trim()) next.name = "Please enter your name.";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.get("email") || "")) next.email = "Enter a valid email address.";
     if ((data.get("message") || "").trim().length < 10) next.message = "Please add at least 10 characters.";
     setErrors(next);
     if (Object.keys(next).length) {
-      event.preventDefault();
       return;
     }
+
     setSubmitting(true);
+    setToast(null);
+
+    try {
+      const response = await fetch(
+        import.meta.env.VITE_CONTACT_API_URL || "https://roferosryan.vercel.app/api/contact",
+        {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(data)),
+        },
+      );
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || "Message delivery failed.");
+      form.reset();
+      setToast({
+        type: "success",
+        message: result.receiptSent
+          ? "A confirmation receipt was sent to your email."
+          : "Ryan received your message, but the confirmation receipt could not be sent.",
+      });
+    } catch (error) {
+      setToast({
+        type: "error",
+        message: error.message || "Message delivery failed. Please email Ryan directly.",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
   return (
     <section id="contact" className="section contact-section grid-shell">
       <SectionIntro index="06" kicker="Start a conversation" title="Let’s build something useful." copy="I’m open to frontend opportunities where thoughtful interfaces, continuous learning, and practical problem solving matter." />
       <div className="contact-layout">
         <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href={`mailto:${profile.email}`} icon={Mail}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
-        <form className="contact-form" action={`https://formsubmit.co/${profile.email}`} method="POST" onSubmit={submit} noValidate>
-          <input type="hidden" name="_subject" value="New portfolio inquiry for Ryan Roferos" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_next" value="https://ryanworks123.github.io/roferos/?sent=1#contact" />
-          <input type="hidden" name="_url" value="https://ryanworks123.github.io/roferos/#contact" />
-          <input
-            type="hidden"
-            name="_autoresponse"
-            value="Thank you for contacting Ryan Roferos. Your message has been received at ryanroferos.work@gmail.com. Ryan will review your inquiry and reply as soon as possible. This is an automated confirmation."
-          />
-          <input type="text" name="_honey" tabIndex="-1" autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
+        <form className="contact-form" onSubmit={submit} noValidate>
+          <input type="text" name="website" tabIndex="-1" autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
           <div className="form-head"><Layers3 size={20} /><span>New message</span></div>
           <label><span>Name</span><input name="name" autoComplete="name" aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? "name-error" : undefined} placeholder="Your name" />{errors.name && <em id="name-error">{errors.name}</em>}</label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors.email)} aria-describedby={errors.email ? "email-error" : undefined} placeholder="you@company.com" />{errors.email && <em id="email-error">{errors.email}</em>}</label>
@@ -475,7 +494,7 @@ function Contact() {
           <button className="action" type="submit" disabled={submitting}>{submitting ? "Sending…" : "Send message"} <Send size={17} /></button>
         </form>
       </div>
-      <AnimatePresence>{toast && <motion.div className="toast" role="status" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}><Check size={18} /><span><strong>Message sent to Ryan.</strong>A confirmation receipt was sent to your email.</span></motion.div>}</AnimatePresence>
+      <AnimatePresence>{toast && <motion.div className={`toast ${toast.type === "error" ? "toast-error" : ""}`} role={toast.type === "error" ? "alert" : "status"} aria-live={toast.type === "error" ? "assertive" : "polite"} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>{toast.type === "success" ? <Check size={18} /> : <Mail size={18} />}<span><strong>{toast.type === "success" ? "Message sent to Ryan." : "Message not sent."}</strong>{toast.message}</span></motion.div>}</AnimatePresence>
     </section>
   );
 }
