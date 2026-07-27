@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ryan John H. Roferos | Frontend Developer Resume</title>
+  <style>
+    :root {
+      --ink: #16212a;
+      --muted: #4d5a63;
+      --accent: #086b72;
+      --rule: #c9d3d6;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      background: #e8ecee;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+    }
+
+    body {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 18px auto;
+      padding: 12mm 15mm 10mm;
+      background: var(--paper);
+      box-shadow: 0 8px 28px rgba(22, 33, 42, 0.12);
+      font-size: 9pt;
+      line-height: 1.29;
+      overflow-wrap: break-word;
+    }
+
+    header {
+      padding-bottom: 3.2mm;
+      border-bottom: 1.5px solid var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 24.5pt;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .target {
+      margin: 1.4mm 0 2.2mm;
+      color: var(--accent);
+      font-size: 11pt;
+      font-weight: 700;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1mm 3.2mm;
+      color: var(--muted);
+      font-size: 8.3pt;
+    }
+
+    .contact span + span::before {
+      content: "|";
+      margin-right: 3.2mm;
+      color: var(--rule);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    section { margin-top: 3mm; }
+
+    h2 {
+      margin: 0 0 1.35mm;
+      padding-bottom: 0.75mm;
+      border-bottom: 1px solid var(--rule);
+      color: var(--accent);
+      font-size: 9.8pt;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    p { margin: 0; }
+
+    .summary { color: #26343d; }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 31mm 1fr;
+      row-gap: 0.85mm;
+    }
+
+    .skills strong { font-size: 8.7pt; }
+
+    .entry + .entry { margin-top: 2.15mm; }
+
+    .entry-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: baseline;
+      column-gap: 6mm;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 9.35pt;
+      line-height: 1.22;
+    }
+
+    .entry-head time,
+    .entry-head a {
+      color: var(--muted);
+      font-size: 8.4pt;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .entry-subhead {
+      margin-top: 0.35mm;
+      color: var(--muted);
+      font-size: 8.6pt;
+      font-style: italic;
+    }
+
+    ul {
+      margin: 0.9mm 0 0;
+      padding-left: 4.4mm;
+    }
+
+    li {
+      margin: 0.45mm 0;
+      padding-left: 0.6mm;
+    }
+
+    li::marker { color: var(--accent); }
+
+    .project { break-inside: avoid; }
+
+    .tech {
+      color: var(--muted);
+      font-size: 8.25pt;
+      font-weight: 400;
+    }
+
+    .project p { margin-top: 0.65mm; }
+
+    .education-line {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 5mm;
+    }
+
+    .education-line span,
+    .certifications { color: var(--muted); }
+
+    .credential-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8mm 4.8mm;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .credential-list li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .credential-list strong {
+      color: var(--ink);
+      font-size: 8.45pt;
+    }
+
+    .credential-list span {
+      color: var(--muted);
+      font-size: 7.7pt;
+      white-space: nowrap;
+    }
+
+    .additional-training {
+      margin-top: 1mm;
+      color: var(--muted);
+      font-size: 8pt;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media screen and (max-width: 860px) {
+      body {
+        width: calc(100% - 24px);
+        min-height: 0;
+        margin: 12px auto;
+        padding: clamp(24px, 6vw, 52px);
+      }
+    }
+
+    @media screen and (max-width: 620px) {
+      html { background: var(--paper); }
+      body {
+        width: 100%;
+        margin: 0;
+        padding: 24px 18px 32px;
+        box-shadow: none;
+        font-size: 10pt;
+        line-height: 1.45;
+      }
+      h1 { font-size: clamp(23pt, 10vw, 30pt); line-height: 1.05; }
+      .target { margin-top: 2.5mm; }
+      .contact { display: grid; gap: 1.5mm; font-size: 9pt; }
+      .contact span + span::before { content: none; }
+      section { margin-top: 5mm; }
+      h2 { margin-bottom: 2.5mm; font-size: 10.5pt; }
+      .skills, .entry-head, .education-line, .credential-list { grid-template-columns: 1fr; }
+      .skills { gap: 1mm; }
+      .skills strong:not(:first-child) { margin-top: 1.5mm; }
+      .entry + .entry { margin-top: 4mm; }
+      .entry-head { gap: 1mm; }
+      .entry-head time, .education-line > strong { justify-self: start; }
+      .credential-list { gap: 2mm; }
+      .credential-list span { display: block; white-space: normal; }
+    }
+
+    @media print {
+      html, body { background: #fff; }
+      body {
+        margin: 0;
+        box-shadow: none;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ryan John H. Roferos</h1>
+    <p class="target">Frontend Developer | React, TypeScript &amp; Full-Stack Fundamentals</p>
+    <div class="contact" aria-label="Contact information">
+      <span>Cagayan de Oro, Philippines</span>
+      <span><a href="tel:+639455105552">+63 945 510 5552</a></span>
+      <span><a href="mailto:ryanroferos.work@gmail.com">ryanroferos.work@gmail.com</a></span>
+      <span><a href="https://roferosryan.vercel.app">roferosryan.vercel.app</a></span>
+      <span><a href="https://www.linkedin.com/in/ryanganiii">linkedin.com/in/ryanganiii</a></span>
+      <span><a href="https://github.com/Ryanworks123">github.com/Ryanworks123</a></span>
+    </div>
+  </header>
+
+  <main>
+    <section aria-labelledby="summary-heading">
+      <h2 id="summary-heading">Professional Summary</h2>
+      <p class="summary">Frontend developer and recent Information Technology graduate building responsive React and TypeScript applications with clean UI structure, reusable components, form validation, state management, and API-aware workflows. Brings 540 hours of hands-on technical support experience plus practical exposure to SQL data modeling, Prisma, authentication, and production-style project organization.</p>
+    </section>
+
+    <section aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Technical Skills</h2>
+      <div class="skills">
+        <strong>Frontend</strong>
+        <span>React, Next.js, JavaScript, TypeScript, HTML5, CSS3, Tailwind CSS, Bootstrap</span>
+        <strong>Backend &amp; Data</strong>
+        <span>Node.js, PHP, REST APIs, Prisma, MySQL, PostgreSQL, MongoDB, Supabase</span>
+        <strong>Tools &amp; Practices</strong>
+        <span>Git, GitHub, Vite, Vercel, Figma, Zod, React Hook Form, responsive design, accessibility, debugging</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="projects-heading">
+      <h2 id="projects-heading">Selected Projects</h2>
+
+      <article class="entry project">
+        <div class="entry-head">
+          <h3>Personal Portfolio Website <span class="tech">| React, JavaScript, Three.js, Framer Motion, Vercel</span></h3>
+          <a href="https://roferosryan.vercel.app">Live site</a>
+        </div>
+        <p>Built and deployed a recruiter-focused portfolio with reusable content data, accessible navigation and theme controls, reduced-motion support, performance-aware 3D enhancements, and a serverless contact workflow.</p>
+      </article>
+
+      <article class="entry project">
+        <div class="entry-head">
+          <h3>Inventory Management System <span class="tech">| Next.js, TypeScript, Prisma, PostgreSQL, Zod</span></h3>
+          <a href="https://github.com/Ryanworks123">GitHub</a>
+        </div>
+        <p>Designed a normalized inventory data model for users, products, suppliers, categories, locations, stock levels, and immutable stock movements. Added role hierarchy, centralized API error handling, repository-based data access, pagination-ready queries, and transaction-backed list/count operations.</p>
+      </article>
+
+      <article class="entry project">
+        <div class="entry-head">
+          <h3>PromptForge AI <span class="tech">| React, TypeScript, Zustand, React Hook Form, Zod</span></h3>
+        </div>
+        <p>Built a prompt-generation workspace with schema-validated forms, live markdown/plain-text preview, quality scoring, persistent Zustand state, prompt library/history flows, export actions, toast feedback, and accessible reusable UI components.</p>
+      </article>
+
+      <article class="entry project">
+        <div class="entry-head">
+          <h3>GridCraft CSS Grid Inspector <span class="tech">| JavaScript, HTML, CSS</span></h3>
+          <a href="https://github.com/Ryanworks123/gridcraft-css-grid-inspector">GitHub</a>
+        </div>
+        <p>Created a visual CSS Grid inspection tool focused on layout debugging and front-end learning workflows, strengthening practical DOM, styling, and browser-based interaction skills.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Experience</h2>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>IT Intern, Computer Technician &amp; Retail Support</h3>
+          <time>540 hours</time>
+        </div>
+        <p class="entry-subhead">MAKOTEK Computer Sales Inc.</p>
+        <ul>
+          <li>Diagnosed hardware and software issues, performed computer maintenance, and supported day-to-day technical troubleshooting.</li>
+          <li>Translated technical details into clear customer recommendations, practical next steps, and compatibility-focused guidance.</li>
+          <li>Built discipline in root-cause analysis, documentation-minded communication, and calm support under real retail conditions.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <div class="education-line">
+        <p><strong>Bachelor of Science in Information Technology</strong><br><span>Misamis Oriental Institute of Science and Technology Inc.</span></p>
+        <strong>2026</strong>
+      </div>
+    </section>
+
+    <section aria-labelledby="certifications-heading">
+      <h2 id="certifications-heading">Certifications &amp; Professional Development</h2>
+      <ul class="credential-list" aria-label="Anthropic certificates completed in July 2026">
+        <li><strong>Claude Code in Action</strong> <span>- Anthropic · Jul 2026 · ID 9efge4tngs6r</span></li>
+        <li><strong>Claude Platform 101</strong> <span>- Anthropic · Jul 2026 · ID mcp6stwx2ugr</span></li>
+        <li><strong>Building with the Claude API</strong> <span>- Anthropic · Jul 2026 · ID egtzh73xk7kx</span></li>
+        <li><strong>Introduction to Agent Skills</strong> <span>- Anthropic · Jul 2026 · ID xkqyrsr5fq46</span></li>
+        <li><strong>AI Fluency: Framework &amp; Foundations</strong> <span>- Anthropic · Jul 2026 · ID u68f9xewbsqs</span></li>
+        <li><strong>AI Fluency: AI Capabilities &amp; Limitations</strong> <span>- Anthropic · Jul 2026 · ID dhr6ax6ezvj2</span></li>
+      </ul>
+      <p class="additional-training"><strong>Additional training:</strong> JavaScript, SQL databases, MongoDB, PHP web development, Windows Server, Active Directory, AI-assisted development workflows, and Claude API fundamentals.</p>
+    </section>
+  </main>
+</body>
+</html>

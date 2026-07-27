@@ -3,23 +3,23 @@ const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, 
 export const profile = {
   name: "Ryan Roferos",
   role: "Frontend Developer",
-  headline: "Recent IT Graduate",
+  headline: "React, TypeScript & Full-Stack Fundamentals",
   location: "Carmen, Cagayan de Oro, Misamis Oriental",
   email: "ryanroferos.work@gmail.com",
   phone: "+63 9455105552",
   linkedIn: "https://www.linkedin.com/in/ryanganiii",
-  github: "",
-  portfolio: "",
+  github: "https://github.com/Ryanworks123",
+  portfolio: "https://roferosryan.vercel.app",
   resume: publicAsset("Ryan_Roferos_Resume.pdf"),
   summary:
-    "Information Technology graduate with hands-on experience in technical support, troubleshooting, customer assistance, and frontend development. Completed a 540-hour internship at MAKOTEK Computer Sales Inc. and builds responsive web applications using React, Next.js, TypeScript, HTML, CSS, JavaScript, and Tailwind CSS.",
+    "Frontend developer and recent Information Technology graduate building responsive React and TypeScript applications with clean UI structure, reusable components, form validation, state management, and API-aware workflows. Brings 540 hours of hands-on technical support experience plus practical exposure to SQL data modeling, Prisma, authentication, and production-style project organization.",
 };
 
 export const about = [
   "I recently graduated with a Bachelor of Science in Information Technology.",
   "I completed a 540-hour internship at MAKOTEK Computer Sales Inc. with experience in technical support, troubleshooting, computer maintenance, customer assistance, system diagnostics, technical sales, and product consultation.",
-  "I build frontend applications using React, Next.js, TypeScript, HTML, CSS, JavaScript, and Tailwind CSS.",
-  "I enjoy building responsive and user-friendly interfaces and continue improving my frontend development skills through projects and certifications.",
+  "I build React and TypeScript applications with reusable components, responsive layouts, form validation, state management, and API-aware workflows.",
+  "I continue improving through GitHub projects that combine frontend craft with SQL data modeling, authentication concepts, and production-style architecture.",
 ];
 
 export const skills = [
@@ -39,7 +39,7 @@ export const skills = [
   },
   {
     category: "Backend Knowledge",
-    items: ["Node.js", "PHP", "Python (FastAPI)", "REST APIs"],
+    items: ["Node.js", "PHP", "Python (FastAPI)", "REST APIs", "Prisma"],
   },
   {
     category: "Databases",
@@ -47,11 +47,11 @@ export const skills = [
   },
   {
     category: "Authentication",
-    items: ["JWT", "OAuth", "Supabase Auth"],
+    items: ["JWT", "OAuth", "Supabase Auth", "Role-Based Access"],
   },
   {
     category: "Developer Tools",
-    items: ["Git", "GitHub", "VS Code", "Figma", "Vercel"],
+    items: ["Git", "GitHub", "VS Code", "Vite", "Figma", "Vercel"],
   },
   {
     category: "Other Skills",
@@ -70,14 +70,10 @@ export const experiences = [
     company: "MAKOTEK Computer Sales Inc.",
     duration: "540 Hours",
     responsibilities: [
-      "Hardware troubleshooting",
-      "Software troubleshooting",
-      "Computer maintenance",
-      "Technical support",
-      "Customer assistance",
-      "System diagnostics",
-      "Technical sales",
-      "Product consultation",
+      "Diagnosed hardware and software issues",
+      "Performed computer maintenance and system diagnostics",
+      "Delivered technical support and customer assistance",
+      "Explained compatibility, product options, and practical next steps",
     ],
   },
   {
@@ -85,11 +81,9 @@ export const experiences = [
     company: "MAKOTEK Computer Sales Inc.",
     duration: "540 Hours",
     responsibilities: [
-      "Product recommendation",
-      "Customer assistance",
-      "Technical explanation",
-      "Customer communication",
-      "Product knowledge",
+      "Translated technical details into clear product recommendations",
+      "Supported retail customers with compatibility-focused guidance",
+      "Built communication discipline in a real customer-facing environment",
     ],
   },
 ];
@@ -97,58 +91,58 @@ export const experiences = [
 export const projects = [
   {
     title: "Personal Portfolio Website",
-    technologies: ["React.js", "Next.js", "TypeScript", "Tailwind CSS"],
+    technologies: ["React.js", "JavaScript", "Framer Motion", "Three.js", "Vercel"],
     description:
-      "A portfolio website for presenting resume information, projects, skills, certifications, and contact details in a responsive interface.",
-    features: ["Project Overview", "Responsive Design", "Performance"],
+      "A recruiter-focused portfolio with reusable content data, accessible navigation and theme controls, reduced-motion support, performance-aware 3D enhancements, and a serverless contact workflow.",
+    features: ["Responsive Design", "Accessible Interactions", "Serverless Contact", "Performance"],
     challenges:
-      "Organizing resume information into a clear portfolio structure without overstating experience.",
+      "Balancing polished motion and 3D presentation with accessibility, maintainable content, and clear recruiter messaging.",
     learned:
-      "Improved how to structure frontend content, present projects clearly, and keep portfolio messaging aligned with documented experience.",
-    liveDemo: "",
-    github: "",
+      "Improved component organization, portfolio storytelling, deployment workflow, and keeping public claims aligned with documented experience.",
+    liveDemo: "https://roferosryan.vercel.app",
+    github: "https://github.com/Ryanworks123/roferos",
     image: "/favicon.svg",
   },
   {
-    title: "Jay-Ann Motorparts Inventory Management System",
-    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    title: "Inventory Management System",
+    technologies: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Zod"],
     description:
-      "An inventory management system for product information, inventory workflows, reports, and dashboard views.",
-    features: ["Inventory Management", "Product Management", "Reports", "Dashboard"],
+      "A production-style inventory application with normalized data modeling for users, products, suppliers, categories, locations, stock levels, and immutable stock movements.",
+    features: ["SQL Data Model", "Role Hierarchy", "Centralized API Errors", "Repository Layer"],
     challenges:
-      "Designing database-backed inventory screens that organize product and report information clearly.",
+      "Designing inventory workflows around consistent API responses, validation, pagination-ready queries, and transaction-backed list/count operations.",
     learned:
-      "Practiced building CRUD-style web interfaces with PHP, MySQL, JavaScript, HTML, and CSS.",
+      "Practiced clean architecture, Prisma schema design, role-based access concepts, and separating API concerns from data-access logic.",
     liveDemo: "",
-    github: "",
+    github: "https://github.com/Ryanworks123",
     image: "/favicon.svg",
   },
   {
-    title: "Like Our Kings POS System",
-    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"],
+    title: "PromptForge AI",
+    technologies: ["React", "TypeScript", "Zustand", "React Hook Form", "Zod"],
     description:
-      "A POS system project for sales, inventory, reporting, and receipt printing workflows.",
-    features: ["POS", "Sales", "Inventory", "Reporting", "Receipt Printing"],
+      "A prompt-generation workspace with schema-validated forms, live markdown/plain-text preview, quality scoring, persistent state, prompt library/history flows, export actions, and toast feedback.",
+    features: ["Validated Forms", "Live Preview", "Prompt Scoring", "Persistent State"],
     challenges:
-      "Connecting sales and inventory information into a usable point-of-sale workflow.",
+      "Keeping the generator responsive while updating previews, quality scores, autosaved history, and reusable prompt-library state from one form workflow.",
     learned:
-      "Gained experience designing transaction-focused interfaces and database-backed reporting flows.",
+      "Strengthened TypeScript form modeling, client-side state design, validation patterns, and reusable UI composition.",
     liveDemo: "",
-    github: "",
+    github: "https://github.com/Ryanworks123/promptforge-ai",
     image: "/favicon.svg",
   },
   {
-    title: "Burgerism POS UI Design",
-    technologies: ["Figma"],
+    title: "GridCraft CSS Grid Inspector",
+    technologies: ["JavaScript", "HTML", "CSS"],
     description:
-      "A POS user interface design created in Figma with attention to user flow, UI components, prototype behavior, and design process.",
-    features: ["User Flow", "UI Components", "Prototype", "Design Process"],
+      "A visual CSS Grid inspection tool focused on layout debugging and front-end learning workflows.",
+    features: ["CSS Grid", "Visual Debugging", "DOM Interaction", "Responsive Layouts"],
     challenges:
-      "Designing a POS interface flow that keeps common actions accessible and understandable.",
+      "Making grid behavior easier to inspect visually while keeping the interface lightweight and browser-native.",
     learned:
-      "Practiced UI structure, component consistency, and prototype planning in Figma.",
+      "Deepened practical DOM, styling, and layout-debugging skills through a focused JavaScript utility project.",
     liveDemo: "",
-    github: "",
+    github: "https://github.com/Ryanworks123/gridcraft-css-grid-inspector",
     image: "/favicon.svg",
   },
 ];
