@@ -22,6 +22,33 @@ export const about = [
   "My Information Technology and technical-support background strengthens how I diagnose issues, communicate tradeoffs, and deliver reliable solutions.",
 ];
 
+export const aboutHighlights = [
+  {
+    label: "Architecture",
+    title: "Reusable frontend systems",
+    detail:
+      "I structure React and TypeScript applications around reusable components, typed data flow, clear state ownership, and maintainable boundaries. My GitHub work spans focused UI tools, dashboards, and production-oriented application shells.",
+  },
+  {
+    label: "Product UI",
+    title: "Interfaces for real workflows",
+    detail:
+      "I build responsive dashboards, searchable and paginated data views, validated forms, accessible dialogs, charts, mobile navigation, theme systems, and error states designed around the task a user needs to complete.",
+  },
+  {
+    label: "Integration",
+    title: "Frontend connected to the platform",
+    detail:
+      "Projects such as OrbitOps, Linkly, PromptForge, and Nimbus connect polished UI with REST APIs, TanStack Query, authentication, role-based access, PostgreSQL data, uploads, email, persistent preferences, and offline-aware behavior.",
+  },
+  {
+    label: "Delivery",
+    title: "Quality beyond the happy path",
+    detail:
+      "I support delivery with schema validation, semantic HTML, reduced-motion support, Vitest, Testing Library, Playwright, linting, formatting, CI, and security-minded controls. My technical-support background reinforces disciplined debugging and clear communication.",
+  },
+];
+
 export const skills = [
   {
     category: "Frontend",

@@ -22,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
-import { about, certifications, education, experiences, profile, projects, skills } from "./data/portfolio";
+import { aboutHighlights, certifications, education, experiences, profile, projects, skills } from "./data/portfolio";
 import profilePhoto from "./assets/profile.jpg";
 
 const HeroScene = lazy(() => import("./components/HeroScene"));
@@ -37,7 +37,6 @@ const navItems = [
 ];
 
 const roleTitles = ["engineer scalable React interfaces", "turn product requirements into usable UI", "build accessible product experiences", "deliver maintainable frontend systems"];
-const internshipImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943769_y.jpg`;
 const teamImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943788_y.jpg`;
 const brandLogo = `${import.meta.env.BASE_URL}favicon.png`;
 const projectKinds = ["All", "Frontend", "System", "Design"];
@@ -235,13 +234,17 @@ function Story() {
     <section id="story" className="section grid-shell">
       <SectionIntro index="05" kicker="Engineering approach" title="Product thinking, expressed through frontend systems." copy="I approach interfaces as systems: clear component boundaries, intentional states, accessible interactions, and maintainable code that supports the product as it grows." />
       <div className="story-layout">
-        <motion.figure className="story-photo" initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
-          <img src={internshipImage} alt="Laptop maintenance work during Ryan's MAKOTEK internship" loading="lazy" />
-          <figcaption><span>Field note 01</span><b>Hands-on diagnostics</b><p>MAKOTEK Computer Sales Inc.</p></figcaption>
-        </motion.figure>
-        <div className="story-notes">
-          {about.map((item, index) => <motion.article key={item} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }}><span>0{index + 1}</span><p>{item}</p></motion.article>)}
-          <div className="strength-line"><span>Responsive UI</span><span>Debugging</span><span>Customer empathy</span><span>Performance</span></div>
+        <motion.aside className="about-lead" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+          <span>ENGINEERING PROFILE</span>
+          <h3>Building product interfaces with system-level thinking.</h3>
+          <p>My work ranges from focused browser tools to production-oriented operations platforms. I care about architecture, data-rich UI, accessibility, and the delivery practices that keep frontend software dependable.</p>
+          <Action href={profile.github} icon={FiGithub} secondary>Explore my GitHub</Action>
+        </motion.aside>
+        <div className="about-content">
+          <div className="about-detail-grid">
+            {aboutHighlights.map((item, index) => <motion.article key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.06 }}><span>0{index + 1} / {item.label}</span><h3>{item.title}</h3><p>{item.detail}</p></motion.article>)}
+          </div>
+          <div className="strength-line"><span>React 19</span><span>TypeScript</span><span>TanStack</span><span>Accessible UI</span><span>Testing</span><span>API Integration</span></div>
         </div>
       </div>
     </section>
