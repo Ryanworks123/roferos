@@ -29,16 +29,17 @@ const HeroScene = lazy(() => import("./components/HeroScene"));
 
 const navItems = [
   ["home", "Start"],
-  ["story", "Story"],
-  ["journey", "Journey"],
   ["projects", "Work"],
-  ["stack", "Stack"],
+  ["journey", "Experience"],
+  ["stack", "Skills"],
+  ["story", "About"],
   ["contact", "Contact"],
 ];
 
-const roleTitles = ["Ship responsive React interfaces", "Turn requirements into usable UI", "Build accessible product experiences", "Solve frontend problems clearly"];
+const roleTitles = ["ship responsive React interfaces", "turn requirements into usable UI", "build accessible product experiences", "solve frontend problems clearly"];
 const internshipImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943769_y.jpg`;
 const teamImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943788_y.jpg`;
+const brandLogo = `${import.meta.env.BASE_URL}favicon.png`;
 const projectKinds = ["All", "Frontend", "System", "Design"];
 
 const projectMeta = [
@@ -139,7 +140,7 @@ function Header({ theme, toggleTheme }) {
       <a className="skip-link" href="#main">Skip to main content</a>
       <nav className="topbar-inner" aria-label="Primary navigation">
         <a className="wordmark" href="#home" aria-label="Ryan Roferos, home">
-          <span>R/R</span><strong>Ryan Roferos</strong>
+          <img src={brandLogo} alt="" width="52" height="52" />
         </a>
         <div className="desktop-nav">
           {navItems.map(([id, label]) => (
@@ -217,11 +218,11 @@ function Hero() {
       <div className="hero-scene-wrap"><AdaptiveHeroScene /></div>
       <div className="hero-grid grid-shell">
         <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
-          <div className="availability"><span /><b>Open to frontend developer roles</b><em>Philippines / GMT+8</em></div>
-          <p className="hero-greeting">Hello, I’m Ryan Roferos.</p>
-          <h1>Frontend<br /><span>Developer.</span></h1>
-          <div className="role-row"><Terminal size={19} /><span>Ready to</span><motion.strong key={role} initial={{ opacity: 0.35, y: 5 }} animate={{ opacity: 1, y: 0 }}>{roleTitles[role]}</motion.strong></div>
-          <p className="hero-summary">I turn requirements into responsive, accessible interfaces with React. My technical support background adds practical troubleshooting, customer empathy, and a focus on reliable delivery.</p>
+          <div className="availability"><span /><b>Available for junior frontend roles</b><em>Philippines / GMT+8</em></div>
+          <p className="hero-greeting">Frontend developer · technical problem solver</p>
+          <h1>Clear interfaces.<br /><span>Built to work.</span></h1>
+          <div className="role-row"><Terminal size={19} /><span>I’m ready to</span><motion.strong key={role} initial={{ opacity: 0.35, y: 5 }} animate={{ opacity: 1, y: 0 }}>{roleTitles[role]}</motion.strong></div>
+          <p className="hero-summary">I’m Ryan Roferos, an IT graduate who builds responsive React interfaces with the practical mindset of a technician: diagnose carefully, communicate clearly, and make the result reliable.</p>
           <div className="hero-actions">
             <Action href="#projects">Review case studies</Action>
             <Action href={profile.resume} icon={Download} secondary download>Download résumé</Action>
@@ -229,7 +230,7 @@ function Hero() {
           <div className="hero-links">
             <a href={`mailto:${profile.email}`}><Mail /> Contact me</a>
             <a href={profile.linkedIn} target="_blank" rel="noreferrer"><FiLinkedin /> LinkedIn</a>
-            <span className="unavailable" title="No GitHub URL was included in the resume"><FiGithub /> GitHub not listed</span>
+            <a href={profile.github} target="_blank" rel="noreferrer"><FiGithub /> GitHub</a>
           </div>
         </motion.div>
         <div className="hero-console" aria-label="Professional snapshot">
@@ -258,7 +259,7 @@ function SectionIntro({ index, kicker, title, copy }) {
 function Story() {
   return (
     <section id="story" className="section grid-shell">
-      <SectionIntro index="02" kicker="The person behind the interface" title="Technical depth, grounded in service." copy="My frontend perspective started with diagnosing real devices, explaining technical choices, and helping customers move forward." />
+      <SectionIntro index="05" kicker="The person behind the interface" title="Technical depth, grounded in service." copy="My frontend perspective started with diagnosing real devices, explaining technical choices, and helping customers move forward." />
       <div className="story-layout">
         <motion.figure className="story-photo" initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
           <img src={internshipImage} alt="Laptop maintenance work during Ryan's MAKOTEK internship" loading="lazy" />
@@ -326,6 +327,10 @@ function ProjectModal({ project, index, close }) {
           <div><h3>What it does</h3><p>{project.description}</p><h3>Engineering decision</h3><p>{meta.decision}</p></div>
           <div><h3>Core features</h3><ul>{project.features.map((feature) => <li key={feature}><Check size={15} />{feature}</li>)}</ul><h3>What I learned</h3><p>{project.learned}</p></div>
         </div>
+        {(project.liveDemo || project.github) && <div className="modal-actions">
+          {project.liveDemo && <Action href={project.liveDemo} icon={ExternalLink}>Visit live site</Action>}
+          {project.github && <Action href={project.github} icon={FiGithub} secondary>View source</Action>}
+        </div>}
       </motion.article>
     </motion.div>
   );
@@ -343,14 +348,14 @@ function Projects() {
 
   return (
     <section id="projects" className="section grid-shell projects-section">
-      <SectionIntro index="04" kicker="Selected work" title="Projects built around real workflows." copy="Each case study focuses on the interface problem, the supporting stack, and the engineering judgment practiced through the project." />
+      <SectionIntro index="02" kicker="Selected work" title="Projects built around real workflows." copy="Start with the work. Each case study shows the interface problem, the supporting stack, and what I learned while building it." />
       <div className="project-tools">
         <div className="filter-tabs" aria-label="Filter projects">{projectKinds.map((kind) => <button key={kind} className={filter === kind ? "active" : ""} onClick={() => setFilter(kind)}>{kind}</button>)}</div>
         <label className="search-box"><Search size={17} /><span className="sr-only">Search projects</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search work" /></label>
       </div>
       <div className="project-list">
         {visible.map(({ project, index }) => <motion.article className={`project-workspace tone-${projectMeta[index].tone}`} key={project.title} layout initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="project-copy"><span>0{index + 1} / {projectMeta[index].label}</span><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.technologies.map((tech) => <i key={tech}>{tech}</i>)}</div><button className="text-action" onClick={() => setSelected(index)}>Open case study <ArrowRight size={17} /></button></div>
+          <div className="project-copy"><span>0{index + 1} / {projectMeta[index].label}</span><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.technologies.map((tech) => <i key={tech}>{tech}</i>)}</div><div className="project-actions"><button className="text-action" onClick={() => setSelected(index)}>Open case study <ArrowRight size={17} /></button>{project.liveDemo && <a className="text-action" href={project.liveDemo} target="_blank" rel="noreferrer">Live site <ExternalLink size={16} /></a>}</div></div>
           <div className="device-stage"><div className="laptop"><div className="laptop-screen"><ProjectPreview index={index} title={project.title} /></div><div className="laptop-base" /></div><div className="phone"><div className="phone-camera" /><ProjectPreview index={index} title={project.title} /></div></div>
         </motion.article>)}
         {!visible.length && <p className="empty-results">No projects match that search.</p>}
@@ -455,7 +460,10 @@ function Contact() {
 
     try {
       const response = await fetch(
-        import.meta.env.VITE_CONTACT_API_URL || "https://roferosryan.vercel.app/api/contact",
+        import.meta.env.VITE_CONTACT_API_URL
+          || (window.location.hostname.endsWith("github.io")
+            ? "https://roferosryan.vercel.app/api/contact"
+            : "/api/contact"),
         {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -492,7 +500,7 @@ function Contact() {
     <section id="contact" className="section contact-section grid-shell">
       <SectionIntro index="06" kicker="Start a conversation" title="Let’s build something useful." copy="I’m open to frontend opportunities where thoughtful interfaces, continuous learning, and practical problem solving matter." />
       <div className="contact-layout">
-        <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href="#contact-form" icon={Mail} onClick={focusComposer}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
+        <div className="contact-panel"><span>STATUS / AVAILABLE</span><h3>Based in Misamis Oriental.<br />Ready to contribute.</h3><p>{profile.location}</p><div className="contact-actions"><Action href="#contact-form" icon={Mail} onClick={focusComposer}>Email Ryan</Action><Action href={profile.linkedIn} icon={FiLinkedin} secondary>LinkedIn</Action><Action href={profile.github} icon={FiGithub} secondary>GitHub</Action></div><a className="plain-email" href={`mailto:${profile.email}`}>{profile.email}</a></div>
         <form id="contact-form" className="contact-form" onSubmit={submit} noValidate>
           <input type="text" name="website" tabIndex="-1" autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
           <div className="form-head"><Layers3 size={20} /><span>New message</span></div>
@@ -507,28 +515,15 @@ function Contact() {
   );
 }
 
-function Loader() {
-  return <motion.div className="loader" exit={{ opacity: 0 }}><div><span>R/R</span><i /></div><p>Loading career workspace</p></motion.div>;
-}
-
 export default function App() {
-  const [ready, setReady] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem("rr-theme") || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
   const [showTop, setShowTop] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 150, damping: 30, mass: 0.2 });
   useEffect(() => {
-    let secondFrame;
-    const firstFrame = window.requestAnimationFrame(() => {
-      secondFrame = window.requestAnimationFrame(() => setReady(true));
-    });
     const onScroll = () => setShowTop(window.scrollY > 700);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.cancelAnimationFrame(firstFrame);
-      if (secondFrame) window.cancelAnimationFrame(secondFrame);
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -537,11 +532,10 @@ export default function App() {
 
   return (
     <>
-      <AnimatePresence>{!ready && <Loader />}</AnimatePresence>
       <motion.div className="scroll-progress" style={{ scaleX: progress }} />
       <Header theme={theme} toggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />
-      <main id="main"><Hero /><Story /><Journey /><Projects /><Stack /><Contact /></main>
-      <footer className="footer grid-shell"><div><span>R/R</span><p>Ryan Roferos · Frontend Developer</p></div><p>Built with React, Three.js, and attention to detail.</p></footer>
+      <main id="main"><Hero /><Projects /><Journey /><Stack /><Story /><Contact /></main>
+      <footer className="footer grid-shell"><div><img src={brandLogo} alt="" width="42" height="42" /><p>Ryan Roferos · Frontend Developer</p></div><p>Built with React, Three.js, and attention to detail.</p></footer>
       <AnimatePresence>{showTop && <motion.a className="back-top" href="#home" aria-label="Back to top" title="Back to top" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}><ArrowUp size={19} /></motion.a>}</AnimatePresence>
     </>
   );
