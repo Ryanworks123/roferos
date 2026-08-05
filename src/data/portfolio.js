@@ -2,8 +2,8 @@ const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, 
 
 export const profile = {
   name: "Ryan Roferos",
-  role: "Frontend Developer",
-  headline: "React, TypeScript & Full-Stack Fundamentals",
+  role: "Frontend Engineer",
+  headline: "React, TypeScript & Frontend Architecture",
   location: "Carmen, Cagayan de Oro, Misamis Oriental",
   email: "ryanroferos.work@gmail.com",
   phone: "+63 9455105552",
@@ -12,14 +12,14 @@ export const profile = {
   portfolio: "https://roferosryan.vercel.app",
   resume: publicAsset("Ryan_Roferos_Resume.pdf"),
   summary:
-    "Frontend developer and recent Information Technology graduate building responsive React and TypeScript applications with clean UI structure, reusable components, form validation, state management, and API-aware workflows. Brings 540 hours of hands-on technical support experience plus practical exposure to SQL data modeling, Prisma, authentication, and production-style project organization.",
+    "Frontend engineer building responsive React and TypeScript applications with reusable component architecture, accessible interactions, robust form validation, predictable state management, and API-integrated workflows.",
 };
 
 export const about = [
-  "I recently graduated with a Bachelor of Science in Information Technology.",
-  "I completed a 540-hour internship at MAKOTEK Computer Sales Inc. with experience in technical support, troubleshooting, computer maintenance, customer assistance, system diagnostics, technical sales, and product consultation.",
-  "I build React and TypeScript applications with reusable components, responsive layouts, form validation, state management, and API-aware workflows.",
-  "I continue improving through GitHub projects that combine frontend craft with SQL data modeling, authentication concepts, and production-style architecture.",
+  "I engineer React and TypeScript interfaces around reusable components, clear data flow, and maintainable boundaries.",
+  "I design responsive, accessible experiences with deliberate interaction states, form validation, and practical error recovery.",
+  "My projects connect polished frontend work with APIs, authentication concepts, SQL data modeling, and production-style application structure.",
+  "My Information Technology and technical-support background strengthens how I diagnose issues, communicate tradeoffs, and deliver reliable solutions.",
 ];
 
 export const skills = [

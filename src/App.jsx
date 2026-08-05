@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import {
   ArrowRight,
   ArrowUp,
@@ -36,7 +36,7 @@ const navItems = [
   ["contact", "Contact"],
 ];
 
-const roleTitles = ["ship responsive React interfaces", "turn requirements into usable UI", "build accessible product experiences", "solve frontend problems clearly"];
+const roleTitles = ["engineer scalable React interfaces", "turn product requirements into usable UI", "build accessible product experiences", "deliver maintainable frontend systems"];
 const internshipImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943769_y.jpg`;
 const teamImage = `${import.meta.env.BASE_URL}images/photo_6176801367456943788_y.jpg`;
 const brandLogo = `${import.meta.env.BASE_URL}favicon.png`;
@@ -86,27 +86,6 @@ function useScrollSpy() {
     return () => observer.disconnect();
   }, []);
   return active;
-}
-
-function useCounter(target) {
-  const ref = useRef(null);
-  const visible = useInView(ref, { once: true });
-  const reduced = useReducedMotion();
-  const [value, setValue] = useState(() => reduced ? target : 0);
-  useEffect(() => {
-    if (!visible) return undefined;
-    if (reduced) return undefined;
-    const start = performance.now();
-    let frame;
-    const tick = (now) => {
-      const progress = Math.min((now - start) / 900, 1);
-      setValue(Math.round(target * (1 - Math.pow(1 - progress, 3))));
-      if (progress < 1) frame = requestAnimationFrame(tick);
-    };
-    frame = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frame);
-  }, [reduced, target, visible]);
-  return { ref, value };
 }
 
 function IconButton({ label, children, ...props }) {
@@ -175,11 +154,6 @@ function Header({ theme, toggleTheme }) {
   );
 }
 
-function Metric({ value, suffix = "", label }) {
-  const { ref, value: count } = useCounter(value);
-  return <div className="metric" ref={ref}><strong>{count}{suffix}</strong><span>{label}</span></div>;
-}
-
 function AdaptiveHeroScene() {
   const [mounted, setMounted] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -218,11 +192,11 @@ function Hero() {
       <div className="hero-scene-wrap"><AdaptiveHeroScene /></div>
       <div className="hero-grid grid-shell">
         <motion.div className="hero-copy" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
-          <div className="availability"><span /><b>Available for junior frontend roles</b><em>Philippines / GMT+8</em></div>
-          <p className="hero-greeting">Frontend developer · technical problem solver</p>
+          <div className="availability"><span /><b>Available for frontend engineering roles</b><em>Philippines / GMT+8</em></div>
+          <p className="hero-greeting">Frontend engineer · React &amp; TypeScript</p>
           <h1>Clear interfaces.<br /><span>Built to work.</span></h1>
           <div className="role-row"><Terminal size={19} /><span>I’m ready to</span><motion.strong key={role} initial={{ opacity: 0.35, y: 5 }} animate={{ opacity: 1, y: 0 }}>{roleTitles[role]}</motion.strong></div>
-          <p className="hero-summary">I’m Ryan Roferos, an IT graduate who builds responsive React interfaces with the practical mindset of a technician: diagnose carefully, communicate clearly, and make the result reliable.</p>
+          <p className="hero-summary">I’m Ryan Roferos, a frontend engineer focused on building scalable React interfaces, reusable component systems, and accessible product experiences that stay reliable in production.</p>
           <div className="hero-actions">
             <Action href="#projects">Review case studies</Action>
             <Action href={profile.resume} icon={Download} secondary download>Download résumé</Action>
@@ -234,17 +208,17 @@ function Hero() {
           </div>
         </motion.div>
         <div className="hero-console" aria-label="Professional snapshot">
-          <div className="window-bar"><span /><span /><span /><b>career://ryan-roferos</b></div>
+          <div className="window-bar"><span /><span /><span /><b>frontend://ryan-roferos</b></div>
           <div className="identity-panel">
             <img src={profilePhoto} alt="Ryan Roferos" width="96" height="112" />
-            <div><span>PROFILE / 01</span><h2>Frontend Developer</h2><p>BS Information Technology</p></div>
+            <div><span>ENGINEERING PROFILE / 01</span><h2>Frontend Engineer</h2><p>React · TypeScript · UI Architecture</p></div>
           </div>
-          <div className="metrics-row">
-            <Metric value={540} suffix="h" label="Internship" />
-            <Metric value={4} label="Projects" />
-            <Metric value={10} label="Credentials" />
+          <div className="capability-grid" aria-label="Frontend engineering capabilities">
+            <article><span>01 / SYSTEMS</span><strong>Reusable component architecture</strong></article>
+            <article><span>02 / EXPERIENCE</span><strong>Responsive, accessible interfaces</strong></article>
+            <article><span>03 / DELIVERY</span><strong>API-ready product workflows</strong></article>
           </div>
-          <div className="signal-row"><span>React.js</span><span>TypeScript</span><span>Next.js</span><span>Tailwind</span></div>
+          <div className="signal-row"><span>React.js</span><span>TypeScript</span><span>Next.js</span><span>Responsive UI</span></div>
         </div>
       </div>
       <a className="scroll-cue" href="#story"><span>Scroll to inspect</span><ChevronDown size={18} /></a>
@@ -259,7 +233,7 @@ function SectionIntro({ index, kicker, title, copy }) {
 function Story() {
   return (
     <section id="story" className="section grid-shell">
-      <SectionIntro index="05" kicker="The person behind the interface" title="Technical depth, grounded in service." copy="My frontend perspective started with diagnosing real devices, explaining technical choices, and helping customers move forward." />
+      <SectionIntro index="05" kicker="Engineering approach" title="Product thinking, expressed through frontend systems." copy="I approach interfaces as systems: clear component boundaries, intentional states, accessible interactions, and maintainable code that supports the product as it grows." />
       <div className="story-layout">
         <motion.figure className="story-photo" initial={{ opacity: 0, scale: 0.98 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
           <img src={internshipImage} alt="Laptop maintenance work during Ryan's MAKOTEK internship" loading="lazy" />
@@ -276,13 +250,13 @@ function Story() {
 
 function Journey() {
   const entries = [
-    ...education.map((item) => ({ type: "Education", icon: GraduationCap, title: item.degree, place: item.institution, period: item.period, detail: item.location || "Academic foundation" })),
     ...experiences.map((item) => ({ type: "Experience", icon: BriefcaseBusiness, title: item.title, place: item.company, period: item.duration, detail: item.responsibilities.slice(0, 5).join(" · ") })),
+    ...education.map((item) => ({ type: "Education", icon: GraduationCap, title: item.degree, place: item.institution, period: item.period, detail: item.location || "Academic foundation" })),
   ];
   return (
     <section id="journey" className="section journey-section">
       <div className="grid-shell">
-        <SectionIntro index="03" kicker="Education and experience" title="A timeline of learning by doing." />
+        <SectionIntro index="03" kicker="Professional foundation" title="Experience that strengthens the engineering work." />
         <div className="journey-grid">
           <figure className="journey-visual"><img src={teamImage} alt="Ryan with colleagues at MAKOTEK Computer Sales" loading="lazy" /><figcaption><Sparkles size={17} /> 540 hours of workplace learning</figcaption></figure>
           <div className="timeline">
@@ -302,7 +276,7 @@ function Journey() {
 }
 
 function ProjectPreview({ index }) {
-  if (index === 0) return <div className="preview portfolio-preview"><div className="preview-nav"><i /><i /><i /><span /></div><div className="preview-hero"><small>FRONTEND DEVELOPER</small><strong>Interfaces with<br />clarity built in.</strong><button>Explore work</button></div></div>;
+  if (index === 0) return <div className="preview portfolio-preview"><div className="preview-nav"><i /><i /><i /><span /></div><div className="preview-hero"><small>FRONTEND ENGINEER</small><strong>Interfaces with<br />clarity built in.</strong><button>Explore work</button></div></div>;
   if (index === 1) return <div className="preview inventory-preview"><aside><b>JAM</b><i /><i /><i /></aside><main><small>Inventory overview</small><div className="mini-stats"><i /><i /><i /></div><div className="mini-table"><span /><span /><span /><span /></div></main></div>;
   if (index === 2) return <div className="preview pos-preview"><main><small>Current order</small><div className="receipt-lines"><i /><i /><i /></div><strong>₱ 1,240.00</strong><button>Complete sale</button></main><aside><span /><span /><span /><span /><span /><span /></aside></div>;
   return <div className="preview design-preview"><div className="design-toolbar"><i /><i /><i /><i /></div><main><small>BURGERISM / POS</small><strong>Fast orders.<br />Clear choices.</strong><div className="food-grid"><span /><span /><span /></div></main></div>;
@@ -535,7 +509,7 @@ export default function App() {
       <motion.div className="scroll-progress" style={{ scaleX: progress }} />
       <Header theme={theme} toggleTheme={() => setTheme((current) => current === "dark" ? "light" : "dark")} />
       <main id="main"><Hero /><Projects /><Journey /><Stack /><Story /><Contact /></main>
-      <footer className="footer grid-shell"><div><img src={brandLogo} alt="" width="42" height="42" /><p>Ryan Roferos · Frontend Developer</p></div><p>Built with React, Three.js, and attention to detail.</p></footer>
+      <footer className="footer grid-shell"><div><img src={brandLogo} alt="" width="42" height="42" /><p>Ryan Roferos · Frontend Engineer</p></div><p>Built with React, Three.js, and attention to detail.</p></footer>
       <AnimatePresence>{showTop && <motion.a className="back-top" href="#home" aria-label="Back to top" title="Back to top" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.8 }}><ArrowUp size={19} /></motion.a>}</AnimatePresence>
     </>
   );
